@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>516 Hackers Vuln Playground</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔓 516 Hackers Vulnerability Playground</h1>
+            <p class="warning">⚠️ FOR TRAINING ENVIRONMENT ONLY - DO NOT USE IN PRODUCTION</p>
+        </header>
+
+        <nav class="modules">
+            <div class="module-card" onclick="showModule('sqli')">
+                <h3>💉 SQL Injection</h3>
+                <p>Practice SQL injection techniques</p>
+            </div>
+            <div class="module-card" onclick="showModule('xss')">
+                <h3>🦠 XSS</h3>
+                <p>Cross-site scripting vulnerabilities</p>
+            </div>
+            <div class="module-card" onclick="showModule('auth')">
+                <h3>🔑 Auth Bypass</h3>
+                <p>Weak authentication mechanisms</p>
+            </div>
+            <div class="module-card" onclick="showModule('file-upload')">
+                <h3>📁 File Upload</h3>
+                <p>Insecure file upload handling</p>
+            </div>
+        </nav>
+
+        <main>
+            <!-- SQL Injection Module -->
+            <div id="sqli-module" class="module hidden">
+                <h2>SQL Injection Practice</h2>
+                
+                <div class="vulnerability-section">
+                    <h3>Vulnerable Search</h3>
+                    <input type="text" id="sqli-username" placeholder="Enter username">
+                    <button onclick="testSQLi()">Search (Vulnerable)</button>
+                    <button onclick="testSQLiSecure()">Search (Secure)</button>
+                    <div id="sqli-results" class="results"></div>
+                </div>
+
+                <div class="hint-section">
+                    <h4>💡 Try these payloads:</h4>
+                    <code>admin' OR '1'='1</code><br>
+                    <code>' UNION SELECT 1,2,3,4,5-- -</code><br>
+                    <code>'; DROP TABLE users-- -</code>
+                </div>
+            </div>
+
+            <!-- XSS Module -->
+            <div id="xss-module" class="module hidden">
+                <h2>XSS Practice</h2>
+                
+                <div class="vulnerability-section">
+                    <h3>Add Comment (Vulnerable)</h3>
+                    <input type="text" id="xss-username" placeholder="Your name">
+                    <textarea id="xss-comment" placeholder="Your comment"></textarea>
+                    <button onclick="addComment()">Add Comment (Vulnerable)</button>
+                    <button onclick="addCommentSecure()">Add Comment (Secure)</button>
+                </div>
+
+                <div id="comments-section">
+                    <h3>Comments:</h3>
+                    <div id="comments-list"></div>
+                </div>
+
+                <div class="hint-section">
+                    <h4>💡 Try these payloads:</h4>
+                    <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code><br>
+                    <code>&lt;img src=x onerror=alert(1)&gt;</code>
+                </div>
+            </div>
+
+            <!-- Auth Bypass Module -->
+            <div id="auth-module" class="module hidden">
+                <h2>Authentication Bypass</h2>
+                
+                <div class="vulnerability-section">
+                    <h3>Weak Login</h3>
+                    <input type="text" id="auth-username" placeholder="Username">
+                    <input type="password" id="auth-password" placeholder="Password">
+                    <button onclick="loginWeak()">Login (Weak)</button>
+                    <button onclick="loginStrong()">Login (Strong)</button>
+                    <button onclick="accessAdmin()">Access Admin Panel</button>
+                </div>
+
+                <div id="auth-results" class="results"></div>
+
+                <div class="hint-section">
+                    <h4>💡 Try these techniques:</h4>
+                    <code>SQL Injection in login</code><br>
+                    <code>Session manipulation</code>
+                </div>
+            </div>
+
+            <!-- File Upload Module -->
+            <div id="file-upload-module" class="module hidden">
+                <h2>File Upload Vulnerabilities</h2>
+                
+                <div class="vulnerability-section">
+                    <h3>Insecure Upload</h3>
+                    <input type="file" id="insecure-file">
+                    <button onclick="uploadInsecure()">Upload (Insecure)</button>
+                    
+                    <h3>Secure Upload</h3>
+                    <input type="file" id="secure-file">
+                    <button onclick="uploadSecure()">Upload (Secure)</button>
+                </div>
+
+                <div id="upload-results" class="results"></div>
+
+                <div class="hint-section">
+                    <h4>💡 Try uploading:</h4>
+                    <code>malicious.php files</code><br>
+                    <code>executable files</code>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
